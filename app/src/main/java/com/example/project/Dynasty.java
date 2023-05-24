@@ -13,4 +13,24 @@ public class Dynasty {
     private int disestablish;
     @SerializedName("auxdata")
     private String wikipedia;
+
+    public String getName(){
+      return name;
+    }
+
+    public String getCapital(){
+        return capital;
+    }
+
+    public int getEstablish(){
+        return establish;
+    }
+
+    public int getDisestablish(){
+        return disestablish;
+    }
+
+    public String getWikipedia(){
+        return wikipedia;
+    }
 }
