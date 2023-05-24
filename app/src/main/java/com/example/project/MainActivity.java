@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -18,13 +17,10 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener{
 
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=a22zacno";
-
-    private ArrayList<Dynasty> dynastyArrayList = new ArrayList<>();
 
     public void showAbout(View view){
         //Starts the about activity
@@ -32,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         startActivity(i);
     }
 
-    public void detailedInfo(View view, Dynasty item){
-        Intent i = new Intent(MainActivity.this, AboutActivity.class);
+    public void detailedInfo(Dynasty item){
+        Intent i = new Intent(MainActivity.this, DetailActivity.class);
         //adds the data of the dynasty
         i.putExtra("name", item.getName());
         i.putExtra("capital", item.getCapital());
@@ -90,16 +86,16 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Type type = new TypeToken<ArrayList<Dynasty>>() {}.getType();
         ArrayList<Dynasty> dynastyArrayList = gson.fromJson(json, type);
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, dynastyArrayList, new RecyclerViewAdapter.OnClickListener() {
+        RecyclerView view = findViewById(R.id.recycler_view);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(MainActivity.this, dynastyArrayList, new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(Dynasty item) {
-                detailedInfo(findViewById(R.id.mainMenu), item);
+                detailedInfo(item);
                 Log.d("==>","Displays detailed dynastic info");
             }
         });
 
-        RecyclerView view = findViewById(R.id.recycler_view);
-        view.setLayoutManager(new LinearLayoutManager(this));
         view.setAdapter(adapter);
+        view.setLayoutManager(new LinearLayoutManager(MainActivity.this));
     }
 }

@@ -31,7 +31,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.title.setText(items.get(position).getName());
+        final Dynasty item = items.get(position);
+        holder.title.setText(item.getName());
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickListener.onClick(item);
+            }
+        });
     }
 
     @Override
@@ -39,20 +46,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return items.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
 
         ViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
             title = itemView.findViewById(R.id.title);
         }
-
-        @Override
-        public void onClick(View view) {
-            onClickListener.onClick(items.get(getAdapterPosition()));
-        }
     }
+
+
 
     public interface OnClickListener {
         void onClick(Dynasty item);
