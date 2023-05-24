@@ -20,14 +20,24 @@ public class MainActivity extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //new JsonTask((JsonTask.JsonTaskListener) this).execute("https://mobprog.webug.se/json-api?login=a22zacno");
+        //new JsonTask(this).execute("https://mobprog.webug.se/json-api?login=a22zacno");
 
         ArrayList<RecyclerViewItem> items = new ArrayList<>(Arrays.asList(
-                new RecyclerViewItem("Matterhorn"),
-                new RecyclerViewItem("Mont Blanc"),
-                new RecyclerViewItem("Denali")
+                new RecyclerViewItem("test1"),
+                new RecyclerViewItem("test2"),
+                new RecyclerViewItem("test3")
         ));
 
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, new RecyclerViewAdapter.OnClickListener() {
+            @Override
+            public void onClick(RecyclerViewItem item) {
+                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RecyclerView view = findViewById(R.id.recycler_view);
+        view.setLayoutManager(new LinearLayoutManager(this));
+        view.setAdapter(adapter);
     }
 
 }
