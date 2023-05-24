@@ -1,20 +1,25 @@
 package com.example.project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 public class AboutActivity extends AppCompatActivity {
-
-    private WebView aboutWebView;
 
     public void showMain(View view){
         //Starts the main activity
@@ -28,12 +33,6 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        aboutWebView = (WebView) findViewById(R.id.my_webview);
-        WebViewClient aboutClient = new WebViewClient();
-        aboutWebView.setWebViewClient(aboutClient);
-        aboutWebView.getSettings().setJavaScriptEnabled(true);
-        aboutWebView.loadUrl("file///assets/About.html");
     }
 
     @Override

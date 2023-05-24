@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         startActivity(i);
     }
 
+    public void detailedInfo(View view){
+        Intent i = new Intent(MainActivity.this, AboutActivity.class);
+        startActivity(i);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,14 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         setSupportActionBar(toolbar);
 
         new JsonTask(this).execute(JSON_URL);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
     }
 
     @Override

@@ -4,12 +4,12 @@
     tools:context="com.example.project.AboutActivity">
     <item
         android:id="@+id/mainscreen"
-        android:orderInCategory="110"
-        android:title="@string/mainscreen"
+        android:orderInCategory="100"
+        android:title="@string/about"
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:orderInCategory="100"
-        android:title="@string/about"
+        android:orderInCategory="110"
+        android:title="@string/mainscreen"
         app:showAsAction="never" />
 </menu>
