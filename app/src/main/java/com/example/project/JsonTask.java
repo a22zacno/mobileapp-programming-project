@@ -2,18 +2,13 @@ package com.example.project;
 
 import android.os.AsyncTask;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 
 public class JsonTask extends AsyncTask<String, String, String> {
 
@@ -67,8 +62,5 @@ public class JsonTask extends AsyncTask<String, String, String> {
     @Override
     protected void onPostExecute(String json) {
         listener.onPostExecute(json);
-        Gson gson = new Gson();
-        Type type = new TypeToken<List<Dynasty>>() {}.getType();
-        List<Dynasty> dynastyList = gson.fromJson(json, type);
     }
 }
