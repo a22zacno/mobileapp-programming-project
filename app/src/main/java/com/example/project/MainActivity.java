@@ -32,8 +32,14 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         startActivity(i);
     }
 
-    public void detailedInfo(View view){
+    public void detailedInfo(View view, Dynasty item){
         Intent i = new Intent(MainActivity.this, AboutActivity.class);
+        //adds the data of the dynasty
+        i.putExtra("name", item.getName());
+        i.putExtra("capital", item.getCapital());
+        i.putExtra("establish", item.getEstablish());
+        i.putExtra("disestablish", item.getDisestablish());
+        i.putExtra("wikipedia", item.getWikipedia());
         startActivity(i);
     }
 
@@ -87,7 +93,8 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, dynastyArrayList, new RecyclerViewAdapter.OnClickListener() {
             @Override
             public void onClick(Dynasty item) {
-                Toast.makeText(MainActivity.this, item.getName(), Toast.LENGTH_SHORT).show();
+                detailedInfo(findViewById(R.id.mainMenu), item);
+                Log.d("==>","Displays detailed dynastic info");
             }
         });
 
