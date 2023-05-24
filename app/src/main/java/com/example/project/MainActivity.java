@@ -1,7 +1,11 @@
 package com.example.project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +17,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity{
+
+    public void showAbout(View view){
+        //Starts the about activity
+        Intent i = new Intent(MainActivity.this, AboutActivity.class);
+        startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,5 +56,19 @@ public class MainActivity extends AppCompatActivity{
         // Creates and inflates the menu
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //Switches to the second activity if pressed
+        int id = item.getItemId();
+
+        if (id == R.id.about) {
+            showAbout(findViewById(R.id.mainMenu));
+            Log.d("==>","Displays about page for the app");
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
