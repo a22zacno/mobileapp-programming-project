@@ -9,8 +9,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class AboutActivity extends AppCompatActivity {
+
+    private WebView aboutWebView;
 
     public void showMain(View view){
         //Starts the main activity
@@ -24,6 +28,12 @@ public class AboutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        aboutWebView = (WebView) findViewById(R.id.my_webview);
+        WebViewClient aboutClient = new WebViewClient();
+        aboutWebView.setWebViewClient(aboutClient);
+        aboutWebView.getSettings().setJavaScriptEnabled(true);
+        aboutWebView.loadUrl("file///assets/About.html");
     }
 
     @Override

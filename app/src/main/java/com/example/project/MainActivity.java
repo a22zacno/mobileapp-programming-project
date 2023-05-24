@@ -23,9 +23,8 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity implements JsonTask.JsonTaskListener{
 
     private final String JSON_URL = "https://mobprog.webug.se/json-api?login=a22zacno";
-    private final String JSON_FILE = "dynasties.json";
 
-    ArrayList<Dynasty>dynastyArrayList= new ArrayList<>();
+    private ArrayList<Dynasty> dynastyArrayList = new ArrayList<>();
 
     public void showAbout(View view){
         //Starts the about activity
@@ -40,24 +39,7 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         new JsonTask(this).execute(JSON_URL);
-
-        ArrayList<RecyclerViewItem> items = new ArrayList<>(Arrays.asList(
-                new RecyclerViewItem(dynastyArrayList.toString())
-        ));
-
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, items, new RecyclerViewAdapter.OnClickListener() {
-            @Override
-            public void onClick(RecyclerViewItem item) {
-                Toast.makeText(MainActivity.this, item.getTitle(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        RecyclerView view = findViewById(R.id.recycler_view);
-        view.setLayoutManager(new LinearLayoutManager(this));
-        view.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -87,6 +69,17 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         Gson gson = new Gson();
 
         Type type = new TypeToken<ArrayList<Dynasty>>() {}.getType();
-        dynastyArrayList = gson.fromJson(json, type);
+        ArrayList<Dynasty> dynastyArrayList = gson.fromJson(json, type);
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, dynastyArrayList, new RecyclerViewAdapter.OnClickListener() {
+            @Override
+            public void onClick(Dynasty item) {
+                Toast.makeText(MainActivity.this, item.getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        RecyclerView view = findViewById(R.id.recycler_view);
+        view.setLayoutManager(new LinearLayoutManager(this));
+        view.setAdapter(adapter);
     }
 }

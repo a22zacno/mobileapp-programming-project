@@ -33,4 +33,8 @@ public class Dynasty {
     public String getWikipedia(){
         return wikipedia;
     }
+    @Override
+    public String toString() {
+        return name;
+    }
 }
